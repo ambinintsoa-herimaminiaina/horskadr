@@ -26,9 +26,10 @@ jobs:
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-          rsync -avzr --delete             -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"             dist/             $SSH_USER@$SSH_HOST:/home/horskad1/domains/horskadr.mg/public_html/
+          ssh-keyscan -p $SSH_PORT -H $SSH_HOST >> ~/.ssh/known_hosts 2>/dev/null
+          rsync -avzr --delete -e "ssh -i ~/.ssh/id_rsa -p $SSH_PORT -o StrictHostKeyChecking=no" dist/ $SSH_USER@$SSH_HOST:/home/horskad1/domains/horskadr.mg/public_html/
