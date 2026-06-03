@@ -27,11 +27,11 @@ jobs:
       - name: Deploy via FTP → Simafri
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server:   ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          local-dir:  ./dist/
-          server-dir: public_html/
+          server:      ${{ secrets.FTP_HOST }}
+          username:    ${{ secrets.FTP_USER }}
+          password:    ${{ secrets.FTP_PASS }}
+          local-dir:   ./dist/
+          server-dir:  public_html/
           dangerous-clean-slate: false
           exclude: |
             **/.git*
