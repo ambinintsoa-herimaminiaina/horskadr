@@ -1,4 +1,4 @@
-name: Build & Deploy Simafri
+name: Build and Deploy Simafri
 
 on:
   push:
@@ -27,4 +27,4 @@ jobs:
           remote_path: /home/horskad1/domains/horskadr.mg/public_html/
           remote_host: ${{ secrets.SSH_HOST }}
           remote_user: ${{ secrets.SSH_USER }}
-          remote_key:  ${{ secrets.SSH_PRIVATE_KEY }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
