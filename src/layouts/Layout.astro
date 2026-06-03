@@ -1,146 +1,106 @@
 ---
 import '../styles/global.css';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import Cursor from '../components/Cursor.astro';
 import Grain from '../components/Grain.astro';
+import Cursor from '../components/Cursor.astro';
 
 interface Props {
   title?: string;
   description?: string;
-  currentPage?: string;
-  lang?: 'fr' | 'mg';
 }
 
 const {
   title = 'HORS KADR',
   description = "L'Impact. Pionnier de l'innovation malgache.",
-  currentPage = '/',
-  lang = 'fr',
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#080808" />
-
-    <!-- OG -->
-    <meta property="og:title" content={`${title} — HORS KADR`} />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-
-    <title>{title === 'HORS KADR' ? title : `${title} — HORS KADR`}</title>
+    <title>{title}</title>
     <link rel="icon" href="/favicon.ico" />
 
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
 
-  <body class="bg-hk-black text-hk-white overflow-x-hidden">
-
-    <!-- Grain -->
+  <body>
     <Grain />
-
-    <!-- Cursor -->
     <Cursor />
+    <slot />
 
-    <!-- Page transition overlay -->
-    <div id="page-overlay" class="fixed inset-0 bg-hk-black z-[9990] pointer-events-none" style="opacity:0;"></div>
-
-    <!-- Navigation -->
-    <Navbar lang={lang} currentPage={currentPage} />
-
-    <!-- Content -->
-    <main id="main-content">
-      <slot />
-    </main>
-
-    <!-- Footer -->
-    <Footer lang={lang} />
-
-    <!-- GSAP init -->
     <script>
       import { gsap } from 'gsap';
       import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
       gsap.registerPlugin(ScrollTrigger);
 
-      // Page reveal on load
-      gsap.to('#page-overlay', {
-        opacity: 0,
-        duration: 0.6,
-        ease: 'power2.out',
-        delay: 0.1,
-      });
-
-      // Universal scroll-triggered animations
-      gsap.utils.toArray<HTMLElement>('[data-animate]').forEach((el) => {
-        const delay = parseFloat(el.dataset.delay || '0');
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 55 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            delay,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 88%',
-              once: true,
-            },
-          }
-        );
-      });
-
-      // Staggered children (add data-animate-stagger to parent)
-      gsap.utils.toArray<HTMLElement>('[data-animate-stagger]').forEach((parent) => {
-        const children = parent.children;
-        gsap.fromTo(
-          children,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: 0.12,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: parent,
-              start: 'top 85%',
-              once: true,
-            },
-          }
-        );
-      });
-
-      // Page transition on link click
-      document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((link) => {
-        const href = link.getAttribute('href');
-        if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
-
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const overlay = document.getElementById('page-overlay')!;
-          gsap.to(overlay, {
-            opacity: 1,
-            duration: 0.4,
-            ease: 'power2.in',
-            onComplete: () => { window.location.href = href; },
-          });
+      // Scroll-reveal — fast & clean
+      gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) => {
+        const delay = parseFloat(el.dataset.delay ?? '0');
+        gsap.from(el, {
+          opacity: 0,
+          y: 28,
+          duration: 0.55,
+          delay,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 90%',
+            once: true,
+          },
         });
       });
-    </script>
 
+      // Stagger group
+      gsap.utils.toArray<HTMLElement>('[data-stagger]').forEach((parent) => {
+        gsap.from(Array.from(parent.children), {
+          opacity: 0,
+          y: 24,
+          duration: 0.45,
+          stagger: 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: parent,
+            start: 'top 88%',
+            once: true,
+          },
+        });
+      });
+
+      // Navbar scroll state
+      const navbar = document.getElementById('navbar');
+      const onScroll = () => {
+        if (!navbar) return;
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Active nav link on scroll (IntersectionObserver)
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link[href^="#"]');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((l) => l.classList.remove('active'));
+            const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+            active?.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+
+      sections.forEach((s) => observer.observe(s));
+    </script>
   </body>
 </html>

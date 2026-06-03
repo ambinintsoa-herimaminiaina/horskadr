@@ -1,158 +1,348 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { translations } from '../i18n/index';
-
-const lang = 'fr';
-const t = translations[lang];
-const h = t.hero;
-const at = t.about_teaser;
-const pt = t.projects_teaser;
-const ct = t.cta_band;
-const projects = t.projects.verticals;
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="HORS KADR" currentPage="/" lang={lang}>
+<Layout title="HORS KADR — L'Impact.">
+  <Navbar />
 
-  <!-- ═══ HERO ═══ -->
-  <section class="relative min-h-screen flex flex-col justify-center px-6 lg:px-12 max-w-7xl mx-auto">
+  <!-- ════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <section id="accueil" class="relative min-h-screen flex flex-col justify-center px-6 lg:px-10 max-w-7xl mx-auto overflow-hidden">
 
-    <!-- Background cross mark -->
-    <div class="absolute right-12 top-1/3 w-px h-40 bg-white/5 hidden lg:block"></div>
-    <div class="absolute right-12 top-1/3 mt-20 w-40 h-px bg-white/5 -translate-x-20 hidden lg:block"></div>
+    <!-- Background text watermark -->
+    <span class="absolute right-0 top-1/2 -translate-y-1/2 font-display text-[20vw] text-white/[0.02] leading-none select-none pointer-events-none">
+      HK
+    </span>
 
-    <div class="pt-24">
-      <!-- Label -->
-      <p id="hero-label" class="text-xs font-bold uppercase tracking-[0.3em] text-hk-red mb-8 opacity-0">
-        Madagascar · {new Date().getFullYear()}
+    <div class="pt-20 relative z-10">
+      <p id="h-label" class="section-label" style="opacity:0">
+        Madagascar · 2026
       </p>
 
-      <!-- Main title -->
-      <h1 id="hero-title" class="font-display font-black text-[clamp(4rem,12vw,10rem)] leading-[0.9] uppercase tracking-tight mb-8 opacity-0">
-        {h.tagline}
+      <h1 id="h-title" class="font-display text-[clamp(5rem,16vw,13rem)] leading-[.88] tracking-wider uppercase mb-6" style="opacity:0">
+        L'Impact.
       </h1>
 
-      <!-- Subtitle -->
-      <p id="hero-sub" class="text-hk-muted text-lg lg:text-xl max-w-lg leading-relaxed mb-12 opacity-0">
-        {h.description}
+      <p id="h-sub" class="text-hk-muted text-base lg:text-lg max-w-md leading-relaxed mb-10" style="opacity:0">
+        Pionnier de l'innovation malgache.<br/>
+        Nous bâtissons des entreprises qui comptent.
       </p>
 
-      <!-- CTAs -->
-      <div id="hero-ctas" class="flex flex-wrap gap-4 opacity-0">
-        <a href="/nos-projets" class="btn-primary">{h.cta_primary} ↗</a>
-        <a href="/a-propos" class="btn-outline">{h.cta_secondary}</a>
+      <div id="h-ctas" class="flex flex-wrap gap-3" style="opacity:0">
+        <a href="#nos-projets" class="btn-primary">Nos projets ↗</a>
+        <a href="#a-propos"    class="btn-outline">Qui sommes-nous</a>
       </div>
     </div>
 
-    <!-- Scroll indicator -->
-    <div id="scroll-indicator" class="absolute bottom-10 left-6 lg:left-12 flex items-center gap-3 opacity-0">
-      <div class="w-px h-12 bg-hk-red animate-pulse"></div>
-      <span class="text-xs uppercase tracking-[0.3em] text-hk-muted">{h.scroll}</span>
+    <!-- Scroll cue -->
+    <div id="h-scroll" class="absolute bottom-10 left-6 lg:left-10 flex items-center gap-3" style="opacity:0">
+      <div class="w-px h-10 bg-hk-red bounce"></div>
+      <span class="text-[10px] tracking-[.3em] uppercase text-hk-muted">Défiler</span>
     </div>
   </section>
 
-  <!-- ═══ TICKER ═══ -->
-  <div class="border-y border-white/5 py-5 overflow-hidden my-8">
-    <div class="marquee-track">
-      {[...t.ticker, ...t.ticker].map((item) => (
-        <span class="font-display font-bold text-sm uppercase tracking-[0.25em] text-hk-muted whitespace-nowrap">
-          {item} <span class="text-hk-red mx-4">✦</span>
+
+  <!-- ════════════════════════════════════════
+       TICKER
+  ════════════════════════════════════════ -->
+  <div class="border-y border-hk-border py-4 overflow-hidden">
+    <div class="marquee-track select-none">
+      {['Innovation','Madagascar','Souveraineté','Disruption','Impact','Excellence','Hors du cadre',
+        'Innovation','Madagascar','Souveraineté','Disruption','Impact','Excellence','Hors du cadre'].map(w => (
+        <span class="font-body font-semibold text-xs uppercase tracking-[.25em] text-hk-muted whitespace-nowrap">
+          {w} <span class="text-hk-red">✦</span>
         </span>
       ))}
     </div>
   </div>
 
-  <!-- ═══ ABOUT TEASER ═══ -->
-  <section class="max-w-7xl mx-auto px-6 lg:px-12 py-24 lg:py-32">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+  <!-- ════════════════════════════════════════
+       À PROPOS
+  ════════════════════════════════════════ -->
+  <section id="a-propos" class="max-w-7xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
       <!-- Text -->
       <div>
-        <p data-animate class="text-xs font-bold uppercase tracking-[0.3em] text-hk-red mb-6">{at.label}</p>
-        <h2 data-animate class="font-display font-black text-4xl lg:text-5xl xl:text-6xl uppercase leading-[1] mb-8 whitespace-pre-line">
-          {at.title}
+        <span data-reveal class="section-label">À propos</span>
+        <h2 data-reveal class="font-display text-[clamp(3rem,8vw,6rem)] leading-[.92] tracking-wider uppercase mb-8">
+          Voir ce que<br/>les autres<br/>ne voient pas.
         </h2>
-        <p data-animate class="text-hk-muted leading-relaxed max-w-md mb-10">
-          {at.body}
+        <p data-reveal class="text-hk-muted leading-relaxed mb-4 max-w-md">
+          HORS KADR est un groupe d'innovation malgache. Pas une agence ordinaire — un écosystème conçu pour bâtir la prochaine génération d'entreprises à impact.
         </p>
-        <a data-animate href="/a-propos" class="btn-outline">{at.cta} →</a>
+        <p data-reveal class="text-hk-muted leading-relaxed mb-10 max-w-md">
+          Philosophie stoïcienne. Mouton noir. On agit quand les autres hésitent.
+        </p>
+
+        <div data-stagger class="grid grid-cols-2 gap-4 mb-10">
+          <div class="vcard">
+            <p class="font-display text-3xl tracking-wider text-hk-red mb-1">01</p>
+            <p class="text-xs font-semibold uppercase tracking-widest text-white mb-1">Vision</p>
+            <p class="text-hk-muted text-sm">La référence <em>Made in Madagascar</em></p>
+          </div>
+          <div class="vcard">
+            <p class="font-display text-3xl tracking-wider text-hk-red mb-1">100M</p>
+            <p class="text-xs font-semibold uppercase tracking-widest text-white mb-1">Objectif CA</p>
+            <p class="text-hk-muted text-sm">Centaine de millions à horizon 5 ans</p>
+          </div>
+        </div>
+
+        <a data-reveal href="#engagements" class="btn-outline">Nos engagements →</a>
       </div>
 
       <!-- Visual -->
-      <div data-animate class="relative aspect-square max-w-md mx-auto lg:mx-0">
-        <div class="absolute inset-0 border border-white/8"></div>
-        <div class="absolute inset-4 border border-white/5"></div>
-        <div class="absolute inset-0 flex flex-col items-center justify-center">
-          <span class="font-display font-black text-[clamp(5rem,15vw,9rem)] text-white/5 uppercase select-none leading-none">HK</span>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="w-24 h-24 bg-hk-red rounded-full flex items-center justify-center">
-              <span class="font-display font-black text-4xl text-hk-black">●</span>
+      <div data-reveal class="relative aspect-square max-w-sm mx-auto lg:mx-0">
+        <div class="absolute inset-0 border border-hk-border"></div>
+        <div class="absolute inset-3 border border-white/[0.03]"></div>
+        <!-- Corner accents -->
+        <div class="absolute top-0 left-0   w-5 h-5 border-t-2 border-l-2 border-hk-red"></div>
+        <div class="absolute top-0 right-0  w-5 h-5 border-t-2 border-r-2 border-hk-red"></div>
+        <div class="absolute bottom-0 left-0  w-5 h-5 border-b-2 border-l-2 border-hk-red"></div>
+        <div class="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-hk-red"></div>
+        <!-- Center -->
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="text-center">
+            <span class="font-display text-[8rem] text-white/[0.04] leading-none select-none block">HK</span>
+            <div class="w-16 h-16 bg-hk-red rounded-full flex items-center justify-center mx-auto -mt-8">
+              <span class="font-display text-2xl text-hk-black">●</span>
             </div>
           </div>
         </div>
-        <!-- Corner marks -->
-        <div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-hk-red"></div>
-        <div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-hk-red"></div>
-        <div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-hk-red"></div>
-        <div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-hk-red"></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ PROJECTS TEASER ═══ -->
-  <section class="max-w-7xl mx-auto px-6 lg:px-12 pb-24 lg:pb-32">
-    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
-      <div>
-        <p data-animate class="text-xs font-bold uppercase tracking-[0.3em] text-hk-red mb-4">{pt.label}</p>
-        <h2 data-animate class="font-display font-black text-4xl lg:text-5xl uppercase leading-[1] whitespace-pre-line">
-          {pt.title}
-        </h2>
-      </div>
-      <a data-animate href="/nos-projets" class="btn-outline shrink-0">{pt.cta} ↗</a>
-    </div>
 
-    <div data-animate-stagger class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {projects.map((p) => (
-        <div class="vertical-card">
-          <div class="mb-6">
-            <span class={`badge ${p.status === 'active' ? 'badge-active' : 'badge-soon'}`}>
-              {p.status === 'active'
-                ? t.projects.status_active
-                : p.status === 'soon'
-                ? t.projects.status_soon
-                : t.projects.status_2027}
-            </span>
-          </div>
-          <p class="text-[10px] font-bold uppercase tracking-widest text-hk-muted mb-2">{p.tag}</p>
-          <h3 class="font-display font-bold text-lg uppercase leading-tight mb-3">{p.name}</h3>
-          <p class="text-hk-muted text-sm leading-relaxed">{p.description}</p>
+  <!-- ════════════════════════════════════════
+       NOS PROJETS
+  ════════════════════════════════════════ -->
+  <section id="nos-projets" class="border-t border-hk-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
+
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+        <div>
+          <span data-reveal class="section-label">Nos projets</span>
+          <h2 data-reveal class="font-display text-[clamp(3rem,8vw,6rem)] leading-[.92] tracking-wider uppercase">
+            Des verticales<br/>qui changent<br/>la donne.
+          </h2>
         </div>
-      ))}
+        <p data-reveal class="text-hk-muted max-w-xs leading-relaxed lg:text-right">
+          Chaque entité répond à un manque concret dans l'écosystème malgache.
+        </p>
+      </div>
+
+      <!-- Cards grid -->
+      <div data-stagger class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+        <!-- Card 1 -->
+        <div class="vcard flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted">Commerce</span>
+            <span class="badge badge-on">En cours</span>
+          </div>
+          <h3 class="font-display text-2xl tracking-wider uppercase leading-tight">Maman<br/>Miketrika</h3>
+          <p class="text-hk-muted text-sm leading-relaxed flex-1">Import & revente de produits depuis la Chine. Qualité accessible, impact local immédiat.</p>
+          <span class="font-display text-5xl text-white/[0.05] leading-none select-none self-end">01</span>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="vcard flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted">Tech · SaaS</span>
+            <span class="badge badge-soon">Bientôt</span>
+          </div>
+          <h3 class="font-display text-2xl tracking-wider uppercase leading-tight">HK |<br/>LayLabo</h3>
+          <p class="text-hk-muted text-sm leading-relaxed flex-1">Studio SaaS & apps mobiles. Solutions numériques pensées pour Madagascar et au-delà.</p>
+          <span class="font-display text-5xl text-white/[0.05] leading-none select-none self-end">02</span>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="vcard flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted">Marketing</span>
+            <span class="badge badge-soon">2027</span>
+          </div>
+          <h3 class="font-display text-2xl tracking-wider uppercase leading-tight">HK |<br/>SMMA</h3>
+          <p class="text-hk-muted text-sm leading-relaxed flex-1">Agence marketing digital. Stratégie, contenu, performance — au service des marques ambitieuses.</p>
+          <span class="font-display text-5xl text-white/[0.05] leading-none select-none self-end">03</span>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="vcard flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted">Média</span>
+            <span class="badge badge-soon">2027</span>
+          </div>
+          <h3 class="font-display text-2xl tracking-wider uppercase leading-tight">HK |<br/>Podcast</h3>
+          <p class="text-hk-muted text-sm leading-relaxed flex-1">Le média audio de l'entrepreneuriat malgache. Les conversations qui font avancer.</p>
+          <span class="font-display text-5xl text-white/[0.05] leading-none select-none self-end">04</span>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- ═══ CTA BAND ═══ -->
-  <section class="border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-24 lg:py-32 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
-      <h2 data-animate class="font-display font-black text-4xl lg:text-6xl xl:text-7xl uppercase leading-[1] whitespace-pre-line">
-        {ct.title}
+
+  <!-- ════════════════════════════════════════
+       ENGAGEMENTS
+  ════════════════════════════════════════ -->
+  <section id="engagements" class="border-t border-hk-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
+
+      <span data-reveal class="section-label">Engagements</span>
+      <h2 data-reveal class="font-display text-[clamp(3rem,8vw,6rem)] leading-[.92] tracking-wider uppercase mb-16">
+        Ce en quoi<br/>nous croyons.
       </h2>
-      <a data-animate href="/contact" class="btn-primary text-base py-4 px-8 shrink-0">
-        {ct.cta} ↗
+
+      <div class="flex flex-col divide-y divide-hk-border">
+        {[
+          { n: '01', title: 'Madagascar d\'abord',      body: 'Chaque décision est filtrée par une question : ça profite aux Malgaches ?' },
+          { n: '02', title: 'Souveraineté économique',  body: 'Partenaires étrangers plafonnés à 20-35%. Le contrôle reste ici, toujours.' },
+          { n: '03', title: 'Impact mesurable',         body: 'Pas de promesse creuse. Chaque verticale génère un impact concret et chiffrable.' },
+          { n: '04', title: 'Excellence radicale',      body: 'Le marché malgache mérite le meilleur. Zéro médiocrité tolérée.' },
+          { n: '05', title: 'Transparence radicale',    body: 'On dit ce qu\'on fait. On fait ce qu\'on dit. Sans filtre.' },
+          { n: '06', title: 'Investir la jeunesse',     body: 'Former, mentorer, ouvrir des portes — c\'est notre responsabilité première.' },
+        ].map((item) => (
+          <div data-reveal class="grid grid-cols-12 gap-6 py-8 group">
+            <div class="col-span-2 lg:col-span-1">
+              <span class="font-display text-4xl text-white/[0.08] group-hover:text-hk-red/20 transition-colors leading-none">{item.n}</span>
+            </div>
+            <div class="col-span-10 lg:col-span-11 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <h3 class="font-display text-2xl lg:text-3xl tracking-wider uppercase">{item.title}</h3>
+              <p class="text-hk-muted text-sm leading-relaxed max-w-sm lg:text-right">{item.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════
+       CTA BAND
+  ════════════════════════════════════════ -->
+  <div class="border-t border-hk-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-24 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
+      <h2 data-reveal class="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[.92] tracking-wider uppercase">
+        Prêt à sortir<br/>du cadre ?
+      </h2>
+      <a data-reveal href="#contact" class="btn-primary text-sm py-4 px-8 shrink-0">
+        Nous contacter ↗
       </a>
     </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       CONTACT
+  ════════════════════════════════════════ -->
+  <section id="contact" class="border-t border-hk-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
+
+      <span data-reveal class="section-label">Contact</span>
+      <h2 data-reveal class="font-display text-[clamp(3rem,8vw,6rem)] leading-[.92] tracking-wider uppercase mb-16">
+        Travaillons<br/>ensemble.
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+        <!-- Form -->
+        <form id="contact-form" data-reveal class="flex flex-col gap-5" novalidate>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted" for="name">Nom complet *</label>
+            <input class="field" id="name" name="name" type="text" placeholder="Jean Rakoto" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted" for="email">Email *</label>
+            <input class="field" id="email" name="email" type="email" placeholder="jean@example.mg" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted" for="subject">Sujet</label>
+            <input class="field" id="subject" name="subject" type="text" placeholder="Partenariat · Projet · Autre" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted" for="message">Message *</label>
+            <textarea class="field resize-none" id="message" name="message" rows="5" placeholder="Votre message..." required></textarea>
+          </div>
+          <button id="submit-btn" type="submit" class="btn-primary self-start">Envoyer ↗</button>
+          <p id="form-msg" class="text-sm hidden"></p>
+        </form>
+
+        <!-- Info -->
+        <div data-reveal class="flex flex-col gap-10">
+          <div>
+            <div class="red-line"></div>
+            <p class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted mb-2">Email</p>
+            <a href="mailto:contact@horskadr.mg" class="font-body font-semibold text-xl hover:text-hk-red transition-colors">
+              contact@horskadr.mg
+            </a>
+          </div>
+          <div>
+            <div class="red-line"></div>
+            <p class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted mb-2">Localisation</p>
+            <p class="font-semibold text-xl">Antananarivo, Madagascar</p>
+          </div>
+          <div>
+            <div class="red-line"></div>
+            <p class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted mb-4">Réseaux</p>
+            <div class="flex gap-3 flex-wrap">
+              <a href="https://instagram.com/horskadr" target="_blank" rel="noopener" class="btn-outline py-2 px-4 text-[11px]">Instagram ↗</a>
+              <a href="https://linkedin.com/company/horskadr" target="_blank" rel="noopener" class="btn-outline py-2 px-4 text-[11px]">LinkedIn ↗</a>
+            </div>
+          </div>
+          <div class="mt-auto pt-4 border-t border-hk-border">
+            <span class="font-display text-5xl text-white/[0.04] leading-none select-none">MADE IN MADAGASCAR</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <footer class="border-t border-hk-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <p class="text-hk-muted text-xs">© 2026 HORS KADR. Tous droits réservés.</p>
+      <p class="text-hk-red text-[10px] font-semibold uppercase tracking-widest">Made in Madagascar</p>
+    </div>
+  </footer>
+
 </Layout>
+
 
 <script>
   import { gsap } from 'gsap';
 
-  // Hero entrance animation
-  const tl = gsap.timeline({ delay: 0.5 });
+  // ── Hero entrance (fast stagger)
+  const tl = gsap.timeline({ delay: 0.2 });
+  tl.from('#h-label',  { opacity: 0, y: 16, duration: 0.4, ease: 'power2.out' })
+    .from('#h-title',  { opacity: 0, y: 30, duration: 0.5, ease: 'power2.out' }, '-=0.2')
+    .from('#h-sub',    { opacity: 0, y: 20, duration: 0.4, ease: 'power2.out' }, '-=0.25')
+    .from('#h-ctas',   { opacity: 0, y: 16, duration: 0.35, ease: 'power2.out' }, '-=0.2')
+    .from('#h-scroll', { opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.1');
 
-  tl.to('#hero-label',     { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
-    .to('#hero-title',     { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.3')
-    .to('#hero-sub',       { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
-    .to('#hero-ctas',      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
-    .to('#scroll-indicator', { opacity: 1, duration: 0.6, ease: 'power3.out' }, '-=0.3');
+  // ── Form handler (placeholder)
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const btn  = document.getElementById('submit-btn') as HTMLButtonElement;
+  const msg  = document.getElementById('form-msg')!;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.textContent = 'Envoi...';
+    btn.disabled = true;
+    await new Promise(r => setTimeout(r, 1000));
+    msg.textContent = '✓ Message envoyé. On vous revient rapidement.';
+    msg.className = 'text-sm text-hk-red';
+    form.reset();
+    btn.textContent = 'Envoyer ↗';
+    btn.disabled = false;
+  });
 </script>
