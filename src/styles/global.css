@@ -32,6 +32,11 @@ body {
 }
 
 * { cursor: none; }
+input, textarea, select, [contenteditable] { cursor: text; }
+a, button, [role="button"], label { cursor: none; }
+
+/* data-reveal : hidden until GSAP fires */
+[data-reveal] { opacity: 0; transform: translateY(28px); }
 
 h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; }
 

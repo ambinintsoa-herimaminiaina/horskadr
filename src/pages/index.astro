@@ -26,12 +26,12 @@ import Navbar from '../components/Navbar.astro';
     <div class="pt-24 relative z-10 max-w-7xl mx-auto w-full">
 
       <!-- Tag pill -->
-      <div id="h-tag" style="opacity:0">
+      <div id="h-tag">
         <span class="pill mb-8 inline-flex">🇲🇬 Made in Madagascar</span>
       </div>
 
       <!-- Label -->
-      <p id="h-label" class="section-label" style="opacity:0">
+      <p id="h-label" class="section-label">
         Madagascar · 2026
       </p>
 
@@ -39,7 +39,7 @@ import Navbar from '../components/Navbar.astro';
       <h1
         id="h-title"
         class="font-display uppercase leading-[.86] tracking-wider mb-4"
-        style="font-size:clamp(6rem,14vw,14rem);opacity:0;color:#F0F5F0"
+        style="font-size:clamp(6rem,14vw,14rem);color:#F0F5F0"
       >
         L'IMPACT.
       </h1>
@@ -47,25 +47,25 @@ import Navbar from '../components/Navbar.astro';
       <!-- Subtitle lime -->
       <p id="h-sub2"
          class="font-display uppercase tracking-widest mb-4"
-         style="font-size:clamp(1.2rem,3vw,2.5rem);color:#AAFF57;opacity:0">
+         style="font-size:clamp(1.2rem,3vw,2.5rem);color:#AAFF57">
         Pionnier de l'innovation malgache
       </p>
 
       <!-- Description muted -->
-      <p id="h-sub" class="text-base lg:text-lg max-w-md leading-relaxed mb-10" style="color:#4A6355;opacity:0">
+      <p id="h-sub" class="text-base lg:text-lg max-w-md leading-relaxed mb-10" style="color:#4A6355">
         Nous bâtissons des entreprises qui comptent.<br/>
         Pour Madagascar. Pour le monde.
       </p>
 
       <!-- CTAs -->
-      <div id="h-ctas" class="flex flex-wrap gap-3" style="opacity:0">
+      <div id="h-ctas" class="flex flex-wrap gap-3">
         <a href="#nos-projets" class="btn-lime">Nos projets ↗</a>
         <a href="#a-propos" class="btn-ghost">Qui sommes-nous</a>
       </div>
     </div>
 
     <!-- Scroll indicator -->
-    <div id="h-scroll" class="absolute bottom-10 left-6 lg:left-10 flex items-center gap-3" style="opacity:0">
+    <div id="h-scroll" class="absolute bottom-10 left-6 lg:left-10 flex items-center gap-3">
       <div class="w-px h-10 bounce" style="background:#AAFF57"></div>
       <span class="text-[10px] tracking-[.3em] uppercase" style="color:#4A6355">Défiler</span>
     </div>
@@ -368,15 +368,16 @@ import Navbar from '../components/Navbar.astro';
 <script>
   import { gsap } from 'gsap';
 
-  // Hero entrance (stagger rapide)
-  const tl = gsap.timeline({ delay: 0.15 });
-  tl.from('#h-tag',    { opacity: 0, y: 12, duration: 0.35, ease: 'power2.out' })
-    .from('#h-label',  { opacity: 0, y: 16, duration: 0.35, ease: 'power2.out' }, '-=0.15')
-    .from('#h-title',  { opacity: 0, y: 40, duration: 0.55, ease: 'power2.out' }, '-=0.2')
-    .from('#h-sub2',   { opacity: 0, y: 20, duration: 0.4,  ease: 'power2.out' }, '-=0.25')
-    .from('#h-sub',    { opacity: 0, y: 20, duration: 0.4,  ease: 'power2.out' }, '-=0.2')
-    .from('#h-ctas',   { opacity: 0, y: 16, duration: 0.35, ease: 'power2.out' }, '-=0.2')
-    .from('#h-scroll', { opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.1');
+  // Hero entrance — fromTo pour forcer état initial sans dépendre du DOM
+  const from = { opacity: 0, y: 20 };
+  const tl = gsap.timeline({ delay: 0.1 });
+  tl.fromTo('#h-tag',    { opacity:0, y:12  }, { opacity:1, y:0, duration:0.35, ease:'power2.out' })
+    .fromTo('#h-label',  { opacity:0, y:16  }, { opacity:1, y:0, duration:0.35, ease:'power2.out' }, '-=0.15')
+    .fromTo('#h-title',  { opacity:0, y:40  }, { opacity:1, y:0, duration:0.5,  ease:'power2.out' }, '-=0.2')
+    .fromTo('#h-sub2',   { opacity:0, y:20  }, { opacity:1, y:0, duration:0.4,  ease:'power2.out' }, '-=0.25')
+    .fromTo('#h-sub',    { opacity:0, y:20  }, { opacity:1, y:0, duration:0.4,  ease:'power2.out' }, '-=0.2')
+    .fromTo('#h-ctas',   { opacity:0, y:16  }, { opacity:1, y:0, duration:0.35, ease:'power2.out' }, '-=0.2')
+    .fromTo('#h-scroll', { opacity:0        }, { opacity:1,      duration:0.4,  ease:'power2.out' }, '-=0.1');
 
   // Pills float animation
   const pillIds = ['#pill-1', '#pill-2', '#pill-3'];
