@@ -1,0 +1,78 @@
+---
+import { translations } from '../i18n/index';
+
+interface Props {
+  lang?: 'fr' | 'mg';
+}
+const { lang = 'fr' } = Astro.props;
+const t = translations[lang];
+const nav = t.nav;
+const footer = t.footer;
+---
+
+<footer class="border-t border-white/5 mt-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+
+      <!-- Brand -->
+      <div class="md:col-span-1">
+        <a href="/" class="inline-block mb-6">
+          <span class="font-display font-black text-2xl tracking-widest text-hk-white uppercase">
+            H<span class="inline-block w-5 h-5 bg-hk-red rounded-full align-middle mx-0.5 relative -top-0.5">
+              <span class="absolute inset-0 flex items-center justify-center text-[8px] font-black text-hk-black leading-none">●</span>
+            </span>RS<br/>KADR
+          </span>
+        </a>
+        <p class="text-hk-muted text-sm leading-relaxed max-w-xs">
+          {footer.tagline}<br/>
+          Pionnier de l'innovation malgache.
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-hk-muted mb-6">
+          {footer.links_title}
+        </p>
+        <ul class="flex flex-col gap-3">
+          <li><a href="/"            class="nav-link text-sm">{nav.home}</a></li>
+          <li><a href="/a-propos"    class="nav-link text-sm">{nav.about}</a></li>
+          <li><a href="/nos-projets" class="nav-link text-sm">{nav.projects}</a></li>
+          <li><a href="/engagements" class="nav-link text-sm">{nav.commitments}</a></li>
+          <li><a href="/contact"     class="nav-link text-sm">{nav.contact}</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact & socials -->
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-hk-muted mb-6">
+          Suivre HORS KADR
+        </p>
+        <ul class="flex flex-col gap-3">
+          <li>
+            <a
+              href="https://instagram.com/horskadr"
+              target="_blank"
+              rel="noopener"
+              class="nav-link text-sm"
+            >Instagram</a>
+          </li>
+          <li>
+            <a
+              href="https://linkedin.com/company/horskadr"
+              target="_blank"
+              rel="noopener"
+              class="nav-link text-sm"
+            >LinkedIn</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <p class="text-hk-muted text-xs">{footer.legal}</p>
+      <p class="text-hk-red text-xs font-bold tracking-widest uppercase">{footer.made}</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,187 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { translations } from '../i18n/index';
+
+const lang = 'fr';
+const t = translations[lang].contact;
+const f = t.form;
+---
+
+<Layout title="Contact" currentPage="/contact" lang={lang}>
+
+  <!-- Hero -->
+  <section class="page-hero max-w-7xl mx-auto px-6 lg:px-12">
+    <p class="text-xs font-bold uppercase tracking-[0.3em] text-hk-red mb-6 opacity-0" id="page-label">
+      {t.hero_label}
+    </p>
+    <h1 class="font-display font-black text-[clamp(3.5rem,10vw,8rem)] uppercase leading-[0.9] mb-6 whitespace-pre-line opacity-0" id="page-title">
+      {t.hero_title}
+    </h1>
+    <p class="text-hk-muted text-lg opacity-0" id="page-body">{t.hero_body}</p>
+  </section>
+
+  <!-- Form + info -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-12 py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+      <!-- Form -->
+      <form
+        id="contact-form"
+        data-animate
+        action="#"
+        method="POST"
+        class="flex flex-col gap-6"
+        novalidate
+      >
+        <!-- Name -->
+        <div class="flex flex-col gap-2">
+          <label for="name" class="text-xs font-bold uppercase tracking-widest text-hk-muted">
+            {f.name} <span class="text-hk-red">*</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="bg-transparent border border-white/10 px-5 py-4 text-hk-white placeholder:text-hk-muted/50 focus:outline-none focus:border-hk-red transition-colors"
+            placeholder="Jean Rakoto"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col gap-2">
+          <label for="email" class="text-xs font-bold uppercase tracking-widest text-hk-muted">
+            {f.email} <span class="text-hk-red">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="bg-transparent border border-white/10 px-5 py-4 text-hk-white placeholder:text-hk-muted/50 focus:outline-none focus:border-hk-red transition-colors"
+            placeholder="jean@example.mg"
+          />
+        </div>
+
+        <!-- Subject -->
+        <div class="flex flex-col gap-2">
+          <label for="subject" class="text-xs font-bold uppercase tracking-widest text-hk-muted">
+            {f.subject}
+          </label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            class="bg-transparent border border-white/10 px-5 py-4 text-hk-white placeholder:text-hk-muted/50 focus:outline-none focus:border-hk-red transition-colors"
+            placeholder="Partenariat / Projet / Autre"
+          />
+        </div>
+
+        <!-- Message -->
+        <div class="flex flex-col gap-2">
+          <label for="message" class="text-xs font-bold uppercase tracking-widest text-hk-muted">
+            {f.message} <span class="text-hk-red">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="6"
+            class="bg-transparent border border-white/10 px-5 py-4 text-hk-white placeholder:text-hk-muted/50 focus:outline-none focus:border-hk-red transition-colors resize-none"
+            placeholder="Décrivez votre projet ou votre demande..."
+          ></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" id="submit-btn" class="btn-primary self-start">
+          {f.send} ↗
+        </button>
+
+        <!-- Feedback -->
+        <p id="form-feedback" class="text-sm hidden"></p>
+      </form>
+
+      <!-- Info -->
+      <div data-animate class="flex flex-col gap-10 lg:pt-4">
+
+        <!-- Email direct -->
+        <div>
+          <div class="section-line"></div>
+          <p class="text-xs font-bold uppercase tracking-widest text-hk-muted mb-3">Email</p>
+          <a href="mailto:contact@horskadr.mg" class="font-display font-bold text-xl hover:text-hk-red transition-colors">
+            contact@horskadr.mg
+          </a>
+        </div>
+
+        <!-- Location -->
+        <div>
+          <div class="section-line"></div>
+          <p class="text-xs font-bold uppercase tracking-widest text-hk-muted mb-3">Localisation</p>
+          <p class="font-display font-bold text-xl">Antananarivo, Madagascar</p>
+        </div>
+
+        <!-- Réseaux -->
+        <div>
+          <div class="section-line"></div>
+          <p class="text-xs font-bold uppercase tracking-widest text-hk-muted mb-4">Réseaux</p>
+          <div class="flex gap-4">
+            <a href="https://instagram.com/horskadr" target="_blank" rel="noopener" class="btn-outline py-2 px-4 text-xs">
+              Instagram ↗
+            </a>
+            <a href="https://linkedin.com/company/horskadr" target="_blank" rel="noopener" class="btn-outline py-2 px-4 text-xs">
+              LinkedIn ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Badge -->
+        <div class="mt-auto">
+          <p class="font-display font-black text-4xl text-white/5 uppercase select-none leading-none">
+            MADE IN<br/>MADAGASCAR
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  import { gsap } from 'gsap';
+
+  // Page entrance
+  gsap.timeline({ delay: 0.4 })
+    .to('#page-label', { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' })
+    .to('#page-title', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.3')
+    .to('#page-body',  { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4');
+
+  // Form input focus effects
+  document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach((el) => {
+    el.addEventListener('focus', () => {
+      gsap.to(el, { borderColor: '#E8001C', duration: 0.2 });
+    });
+    el.addEventListener('blur', () => {
+      gsap.to(el, { borderColor: 'rgba(242,242,242,0.1)', duration: 0.2 });
+    });
+  });
+
+  // Form submit (placeholder — connecter à PHP ou Formspree)
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const btn  = document.getElementById('submit-btn') as HTMLButtonElement;
+  const feedback = document.getElementById('form-feedback')!;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.textContent = 'Envoi en cours...';
+    btn.disabled = true;
+
+    // TODO: remplacer par l'endpoint PHP ou Formspree
+    await new Promise(r => setTimeout(r, 1200));
+
+    feedback.textContent = 'Message envoyé. On vous revient rapidement.';
+    feedback.className = 'text-sm text-hk-red';
+    form.reset();
+    btn.textContent = 'Envoyer ↗';
+    btn.disabled = false;
+  });
+</script>
