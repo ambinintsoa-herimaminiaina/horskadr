@@ -7,8 +7,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
 
+    steps:
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build Astro
         run: npm run build
 
       - name: Deploy via FTP → Simafri
@@ -31,7 +31,7 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           local-dir:  ./dist/
-          server-dir: ${{ secrets.FTP_DIR }}
+          server-dir: ./
           dangerous-clean-slate: false
           exclude: |
             **/.git*
