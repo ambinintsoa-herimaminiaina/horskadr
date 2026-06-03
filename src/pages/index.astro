@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="HORS KADR — L'Impact.">
@@ -10,37 +9,65 @@ import Footer from '../components/Footer.astro';
   <!-- ════════════════════════════════════════
        HERO
   ════════════════════════════════════════ -->
-  <section id="accueil" class="relative min-h-screen flex flex-col justify-center px-6 lg:px-10 max-w-7xl mx-auto overflow-hidden">
+  <section
+    id="accueil"
+    class="relative min-h-screen flex flex-col justify-center px-6 lg:px-10 overflow-hidden"
+    style="background: radial-gradient(ellipse at 30% 50%, rgba(20,80,40,0.8) 0%, #060D0A 60%);"
+  >
+    <!-- Floating decorative pills -->
+    <div id="pill-1" class="pill absolute top-[22%] right-[8%] hidden lg:inline-flex" style="font-size:.7rem">Innovation</div>
+    <div id="pill-2" class="pill absolute top-[40%] right-[18%] hidden lg:inline-flex" style="font-size:.7rem">100M+</div>
+    <div id="pill-3" class="pill absolute bottom-[28%] right-[6%] hidden lg:inline-flex" style="font-size:.7rem">Madagascar</div>
 
-    <!-- Background text watermark -->
-    <span class="absolute right-0 top-1/2 -translate-y-1/2 font-display text-[20vw] text-white/[0.02] leading-none select-none pointer-events-none">
-      HK
-    </span>
+    <!-- BG watermark -->
+    <span class="absolute right-0 top-1/2 -translate-y-1/2 font-display leading-none select-none pointer-events-none"
+          style="font-size:22vw;color:rgba(240,245,240,0.015)">HK</span>
 
-    <div class="pt-20 relative z-10">
+    <div class="pt-24 relative z-10 max-w-7xl mx-auto w-full">
+
+      <!-- Tag pill -->
+      <div id="h-tag" style="opacity:0">
+        <span class="pill mb-8 inline-flex">🇲🇬 Made in Madagascar</span>
+      </div>
+
+      <!-- Label -->
       <p id="h-label" class="section-label" style="opacity:0">
         Madagascar · 2026
       </p>
 
-      <h1 id="h-title" class="font-display text-[clamp(5rem,16vw,13rem)] leading-[.88] tracking-wider uppercase mb-6" style="opacity:0">
-        L'Impact.
+      <!-- H1 -->
+      <h1
+        id="h-title"
+        class="font-display uppercase leading-[.86] tracking-wider mb-4"
+        style="font-size:clamp(6rem,14vw,14rem);opacity:0;color:#F0F5F0"
+      >
+        L'IMPACT.
       </h1>
 
-      <p id="h-sub" class="text-hk-muted text-base lg:text-lg max-w-md leading-relaxed mb-10" style="opacity:0">
-        Pionnier de l'innovation malgache.<br/>
-        Nous bâtissons des entreprises qui comptent.
+      <!-- Subtitle lime -->
+      <p id="h-sub2"
+         class="font-display uppercase tracking-widest mb-4"
+         style="font-size:clamp(1.2rem,3vw,2.5rem);color:#AAFF57;opacity:0">
+        Pionnier de l'innovation malgache
       </p>
 
+      <!-- Description muted -->
+      <p id="h-sub" class="text-base lg:text-lg max-w-md leading-relaxed mb-10" style="color:#4A6355;opacity:0">
+        Nous bâtissons des entreprises qui comptent.<br/>
+        Pour Madagascar. Pour le monde.
+      </p>
+
+      <!-- CTAs -->
       <div id="h-ctas" class="flex flex-wrap gap-3" style="opacity:0">
-        <a href="#nos-projets" class="btn-primary">Nos projets ↗</a>
-        <a href="#a-propos"    class="btn-outline">Qui sommes-nous</a>
+        <a href="#nos-projets" class="btn-lime">Nos projets ↗</a>
+        <a href="#a-propos" class="btn-ghost">Qui sommes-nous</a>
       </div>
     </div>
 
-    <!-- Scroll cue -->
+    <!-- Scroll indicator -->
     <div id="h-scroll" class="absolute bottom-10 left-6 lg:left-10 flex items-center gap-3" style="opacity:0">
-      <div class="w-px h-10 bg-hk-red bounce"></div>
-      <span class="text-[10px] tracking-[.3em] uppercase text-hk-muted">Défiler</span>
+      <div class="w-px h-10 bounce" style="background:#AAFF57"></div>
+      <span class="text-[10px] tracking-[.3em] uppercase" style="color:#4A6355">Défiler</span>
     </div>
   </section>
 
@@ -48,12 +75,12 @@ import Footer from '../components/Footer.astro';
   <!-- ════════════════════════════════════════
        TICKER
   ════════════════════════════════════════ -->
-  <div class="border-y border-hk-border py-4 overflow-hidden">
+  <div class="overflow-hidden py-4" style="border-top:1px solid rgba(170,255,87,0.1);border-bottom:1px solid rgba(170,255,87,0.1)">
     <div class="marquee-track select-none">
-      {['Innovation','Madagascar','Souveraineté','Disruption','Impact','Excellence','Hors du cadre',
-        'Innovation','Madagascar','Souveraineté','Disruption','Impact','Excellence','Hors du cadre'].map(w => (
-        <span class="font-body font-semibold text-xs uppercase tracking-[.25em] text-hk-muted whitespace-nowrap">
-          {w} <span class="text-hk-red">✦</span>
+      {['Innovation','Madagascar','Souveraineté','Impact','Disruption','Excellence','Hors du cadre',
+        'Innovation','Madagascar','Souveraineté','Impact','Disruption','Excellence','Hors du cadre'].map(w => (
+        <span class="font-body font-semibold text-xs uppercase whitespace-nowrap" style="letter-spacing:.25em;color:#4A6355">
+          {w} <span style="color:#AAFF57">&#10022;</span>
         </span>
       ))}
     </div>
@@ -61,56 +88,55 @@ import Footer from '../components/Footer.astro';
 
 
   <!-- ════════════════════════════════════════
-       À PROPOS
+       A PROPOS
   ════════════════════════════════════════ -->
   <section id="a-propos" class="max-w-7xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
-
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-      <!-- Text -->
+      <!-- Text col -->
       <div>
         <span data-reveal class="section-label">À propos</span>
-        <h2 data-reveal class="font-display text-[clamp(3rem,8vw,6rem)] leading-[.92] tracking-wider uppercase mb-8">
-          Voir ce que<br/>les autres<br/>ne voient pas.
+        <h2
+          data-reveal
+          class="font-display uppercase leading-[.92] tracking-wider mb-8"
+          style="font-size:clamp(3rem,8vw,6rem)"
+        >
+          VOIR CE QUE LES AUTRES NE VOIENT PAS ENCORE.
         </h2>
-        <p data-reveal class="text-hk-muted leading-relaxed mb-4 max-w-md">
-          HORS KADR est un groupe d'innovation malgache. Pas une agence ordinaire — un écosystème conçu pour bâtir la prochaine génération d'entreprises à impact.
+        <p data-reveal class="leading-relaxed mb-4 max-w-md" style="color:#4A6355">
+          HORS KADR est un groupe d'innovation malgache. Pas une agence ordinaire — un écosystème
+          conçu pour bâtir la prochaine génération d'entreprises à impact.
         </p>
-        <p data-reveal class="text-hk-muted leading-relaxed mb-10 max-w-md">
+        <p data-reveal class="leading-relaxed mb-10 max-w-md" style="color:#4A6355">
           Philosophie stoïcienne. Mouton noir. On agit quand les autres hésitent.
         </p>
 
-        <div data-stagger class="grid grid-cols-2 gap-4 mb-10">
-          <div class="vcard">
-            <p class="font-display text-3xl tracking-wider text-hk-red mb-1">01</p>
-            <p class="text-xs font-semibold uppercase tracking-widest text-white mb-1">Vision</p>
-            <p class="text-hk-muted text-sm">La référence <em>Made in Madagascar</em></p>
-          </div>
-          <div class="vcard">
-            <p class="font-display text-3xl tracking-wider text-hk-red mb-1">100M</p>
-            <p class="text-xs font-semibold uppercase tracking-widest text-white mb-1">Objectif CA</p>
-            <p class="text-hk-muted text-sm">Centaine de millions à horizon 5 ans</p>
-          </div>
+        <!-- Stats pills row -->
+        <div data-reveal class="flex flex-wrap gap-3 mb-10">
+          <span class="pill">100M+ CA visé</span>
+          <span class="pill">4 verticales</span>
+          <span class="pill">2026</span>
         </div>
 
-        <a data-reveal href="#engagements" class="btn-outline">Nos engagements →</a>
+        <a data-reveal href="#engagements" class="btn-ghost">Nos engagements →</a>
       </div>
 
-      <!-- Visual -->
+      <!-- Visual card col -->
       <div data-reveal class="relative aspect-square max-w-sm mx-auto lg:mx-0">
-        <div class="absolute inset-0 border border-hk-border"></div>
-        <div class="absolute inset-3 border border-white/[0.03]"></div>
-        <!-- Corner accents -->
-        <div class="absolute top-0 left-0   w-5 h-5 border-t-2 border-l-2 border-hk-red"></div>
-        <div class="absolute top-0 right-0  w-5 h-5 border-t-2 border-r-2 border-hk-red"></div>
-        <div class="absolute bottom-0 left-0  w-5 h-5 border-b-2 border-l-2 border-hk-red"></div>
-        <div class="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-hk-red"></div>
-        <!-- Center -->
+        <div class="absolute inset-0" style="border:1px solid rgba(170,255,87,0.12)"></div>
+        <div class="absolute inset-3" style="border:1px solid rgba(240,245,240,0.03)"></div>
+        <!-- Corner accents lime -->
+        <div class="absolute top-0 left-0 w-6 h-6" style="border-top:2px solid #AAFF57;border-left:2px solid #AAFF57"></div>
+        <div class="absolute top-0 right-0 w-6 h-6" style="border-top:2px solid #AAFF57;border-right:2px solid #AAFF57"></div>
+        <div class="absolute bottom-0 left-0 w-6 h-6" style="border-bottom:2px solid #AAFF57;border-left:2px solid #AAFF57"></div>
+        <div class="absolute bottom-0 right-0 w-6 h-6" style="border-bottom:2px solid #AAFF57;border-right:2px solid #AAFF57"></div>
+        <!-- Center HK logo -->
         <div class="absolute inset-0 flex items-center justify-center">
           <div class="text-center">
-            <span class="font-display text-[8rem] text-white/[0.04] leading-none select-none block">HK</span>
-            <div class="w-16 h-16 bg-hk-red rounded-full flex items-center justify-center mx-auto -mt-8">
-              <span class="font-display text-2xl text-hk-black">●</span>
+            <span class="font-display leading-none select-none block" style="font-size:8rem;color:rgba(240,245,240,0.03)">HK</span>
+            <div class="flex items-center justify-center mx-auto -mt-8"
+                 style="width:64px;height:64px;background:#AAFF57;border-radius:50%">
+              <span class="font-display text-2xl" style="color:#060D0A">&#9679;</span>
             </div>
           </div>
         </div>
@@ -122,17 +148,21 @@ import Footer from '../components/Footer.astro';
   <!-- ════════════════════════════════════════
        NOS PROJETS
   ════════════════════════════════════════ -->
-  <section id="nos-projets" class="border-t border-hk-border">
+  <section id="nos-projets" style="border-top:1px solid rgba(170,255,87,0.1)">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
 
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
         <div>
           <span data-reveal class="section-label">Nos projets</span>
-          <h2 data-reveal class="font-display text-[clamp(3rem,8vw,6rem)] leading-[.92] tracking-wider uppercase">
+          <h2
+            data-reveal
+            class="font-display uppercase leading-[.92] tracking-wider"
+            style="font-size:clamp(3rem,8vw,6rem)"
+          >
             Des verticales<br/>qui changent<br/>la donne.
           </h2>
         </div>
-        <p data-reveal class="text-hk-muted max-w-xs leading-relaxed lg:text-right">
+        <p data-reveal class="max-w-xs leading-relaxed lg:text-right" style="color:#4A6355">
           Chaque entité répond à un manque concret dans l'écosystème malgache.
         </p>
       </div>
@@ -140,48 +170,48 @@ import Footer from '../components/Footer.astro';
       <!-- Cards grid -->
       <div data-stagger class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-        <!-- Card 1 -->
-        <div class="vcard flex flex-col gap-4">
+        <!-- Card 1 — En cours -->
+        <div class="card flex flex-col gap-4">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted">Commerce</span>
-            <span class="badge badge-on">En cours</span>
+            <span class="text-[10px] font-semibold uppercase tracking-widest" style="color:#4A6355">Commerce</span>
+            <span class="pill text-[10px]" style="background:rgba(170,255,87,0.1);color:#AAFF57;border-color:rgba(170,255,87,0.3)">En cours</span>
           </div>
           <h3 class="font-display text-2xl tracking-wider uppercase leading-tight">Maman<br/>Miketrika</h3>
-          <p class="text-hk-muted text-sm leading-relaxed flex-1">Import & revente de produits depuis la Chine. Qualité accessible, impact local immédiat.</p>
-          <span class="font-display text-5xl text-white/[0.05] leading-none select-none self-end">01</span>
+          <p class="text-sm leading-relaxed flex-1" style="color:#4A6355">Import &amp; revente de produits depuis la Chine. Qualité accessible, impact local immédiat.</p>
+          <span class="font-display text-5xl leading-none select-none self-end" style="color:rgba(240,245,240,0.04)">01</span>
         </div>
 
-        <!-- Card 2 -->
-        <div class="vcard flex flex-col gap-4">
+        <!-- Card 2 — Bientot -->
+        <div class="card flex flex-col gap-4">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted">Tech · SaaS</span>
-            <span class="badge badge-soon">Bientôt</span>
+            <span class="text-[10px] font-semibold uppercase tracking-widest" style="color:#4A6355">Tech · SaaS</span>
+            <span class="pill text-[10px]" style="color:rgba(240,245,240,0.35)">Bientôt</span>
           </div>
           <h3 class="font-display text-2xl tracking-wider uppercase leading-tight">HK |<br/>LayLabo</h3>
-          <p class="text-hk-muted text-sm leading-relaxed flex-1">Studio SaaS & apps mobiles. Solutions numériques pensées pour Madagascar et au-delà.</p>
-          <span class="font-display text-5xl text-white/[0.05] leading-none select-none self-end">02</span>
+          <p class="text-sm leading-relaxed flex-1" style="color:#4A6355">Studio SaaS &amp; apps mobiles. Solutions numériques pensées pour Madagascar et au-delà.</p>
+          <span class="font-display text-5xl leading-none select-none self-end" style="color:rgba(240,245,240,0.04)">02</span>
         </div>
 
-        <!-- Card 3 -->
-        <div class="vcard flex flex-col gap-4">
+        <!-- Card 3 — 2027 -->
+        <div class="card flex flex-col gap-4">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted">Marketing</span>
-            <span class="badge badge-soon">2027</span>
+            <span class="text-[10px] font-semibold uppercase tracking-widest" style="color:#4A6355">Marketing</span>
+            <span class="pill text-[10px]" style="color:rgba(240,245,240,0.35)">2027</span>
           </div>
           <h3 class="font-display text-2xl tracking-wider uppercase leading-tight">HK |<br/>SMMA</h3>
-          <p class="text-hk-muted text-sm leading-relaxed flex-1">Agence marketing digital. Stratégie, contenu, performance — au service des marques ambitieuses.</p>
-          <span class="font-display text-5xl text-white/[0.05] leading-none select-none self-end">03</span>
+          <p class="text-sm leading-relaxed flex-1" style="color:#4A6355">Agence marketing digital. Stratégie, contenu, performance — au service des marques ambitieuses.</p>
+          <span class="font-display text-5xl leading-none select-none self-end" style="color:rgba(240,245,240,0.04)">03</span>
         </div>
 
-        <!-- Card 4 -->
-        <div class="vcard flex flex-col gap-4">
+        <!-- Card 4 — 2027 -->
+        <div class="card flex flex-col gap-4">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted">Média</span>
-            <span class="badge badge-soon">2027</span>
+            <span class="text-[10px] font-semibold uppercase tracking-widest" style="color:#4A6355">Média</span>
+            <span class="pill text-[10px]" style="color:rgba(240,245,240,0.35)">2027</span>
           </div>
           <h3 class="font-display text-2xl tracking-wider uppercase leading-tight">HK |<br/>Podcast</h3>
-          <p class="text-hk-muted text-sm leading-relaxed flex-1">Le média audio de l'entrepreneuriat malgache. Les conversations qui font avancer.</p>
-          <span class="font-display text-5xl text-white/[0.05] leading-none select-none self-end">04</span>
+          <p class="text-sm leading-relaxed flex-1" style="color:#4A6355">Le média audio de l'entrepreneuriat malgache. Les conversations qui font avancer.</p>
+          <span class="font-display text-5xl leading-none select-none self-end" style="color:rgba(240,245,240,0.04)">04</span>
         </div>
 
       </div>
@@ -192,30 +222,38 @@ import Footer from '../components/Footer.astro';
   <!-- ════════════════════════════════════════
        ENGAGEMENTS
   ════════════════════════════════════════ -->
-  <section id="engagements" class="border-t border-hk-border">
+  <section id="engagements" style="border-top:1px solid rgba(170,255,87,0.1)">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
 
       <span data-reveal class="section-label">Engagements</span>
-      <h2 data-reveal class="font-display text-[clamp(3rem,8vw,6rem)] leading-[.92] tracking-wider uppercase mb-16">
+      <h2
+        data-reveal
+        class="font-display uppercase leading-[.92] tracking-wider mb-16"
+        style="font-size:clamp(3rem,8vw,6rem)"
+      >
         Ce en quoi<br/>nous croyons.
       </h2>
 
-      <div class="flex flex-col divide-y divide-hk-border">
+      <div class="flex flex-col" style="border-top:1px solid rgba(170,255,87,0.08)">
         {[
-          { n: '01', title: 'Madagascar d\'abord',      body: 'Chaque décision est filtrée par une question : ça profite aux Malgaches ?' },
-          { n: '02', title: 'Souveraineté économique',  body: 'Partenaires étrangers plafonnés à 20-35%. Le contrôle reste ici, toujours.' },
-          { n: '03', title: 'Impact mesurable',         body: 'Pas de promesse creuse. Chaque verticale génère un impact concret et chiffrable.' },
-          { n: '04', title: 'Excellence radicale',      body: 'Le marché malgache mérite le meilleur. Zéro médiocrité tolérée.' },
-          { n: '05', title: 'Transparence radicale',    body: 'On dit ce qu\'on fait. On fait ce qu\'on dit. Sans filtre.' },
-          { n: '06', title: 'Investir la jeunesse',     body: 'Former, mentorer, ouvrir des portes — c\'est notre responsabilité première.' },
+          { n: '01', title: "Madagascar d'abord",     body: "Chaque décision est filtrée par une question : ça profite aux Malgaches ?" },
+          { n: '02', title: 'Souveraineté économique', body: 'Partenaires étrangers plafonnés à 20-35%. Le contrôle reste ici, toujours.' },
+          { n: '03', title: 'Impact mesurable',        body: 'Pas de promesse creuse. Chaque verticale génère un impact concret et chiffrable.' },
+          { n: '04', title: 'Excellence radicale',     body: 'Le marché malgache mérite le meilleur. Zéro médiocrité tolérée.' },
+          { n: '05', title: 'Transparence radicale',   body: "On dit ce qu'on fait. On fait ce qu'on dit. Sans filtre." },
+          { n: '06', title: 'Investir la jeunesse',    body: "Former, mentorer, ouvrir des portes — c'est notre responsabilité première." },
         ].map((item) => (
-          <div data-reveal class="grid grid-cols-12 gap-6 py-8 group">
+          <div
+            data-reveal
+            class="grid grid-cols-12 gap-6 py-8 group transition-colors"
+            style="border-bottom:1px solid rgba(170,255,87,0.08)"
+          >
             <div class="col-span-2 lg:col-span-1">
-              <span class="font-display text-4xl text-white/[0.08] group-hover:text-hk-red/20 transition-colors leading-none">{item.n}</span>
+              <span class="font-display text-4xl leading-none" style="color:rgba(240,245,240,0.07)">{item.n}</span>
             </div>
             <div class="col-span-10 lg:col-span-11 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               <h3 class="font-display text-2xl lg:text-3xl tracking-wider uppercase">{item.title}</h3>
-              <p class="text-hk-muted text-sm leading-relaxed max-w-sm lg:text-right">{item.body}</p>
+              <p class="text-sm leading-relaxed max-w-sm lg:text-right" style="color:#4A6355">{item.body}</p>
             </div>
           </div>
         ))}
@@ -227,12 +265,16 @@ import Footer from '../components/Footer.astro';
   <!-- ════════════════════════════════════════
        CTA BAND
   ════════════════════════════════════════ -->
-  <div class="border-t border-hk-border">
+  <div style="background:radial-gradient(ellipse at 50% 50%, rgba(20,80,40,0.7) 0%, #060D0A 70%);border-top:1px solid rgba(170,255,87,0.1)">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 py-24 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
-      <h2 data-reveal class="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[.92] tracking-wider uppercase">
-        Prêt à sortir<br/>du cadre ?
+      <h2
+        data-reveal
+        class="font-display uppercase leading-[.92] tracking-wider"
+        style="font-size:clamp(2.5rem,7vw,5.5rem)"
+      >
+        PRÊT À SORTIR<br/>DU CADRE ?
       </h2>
-      <a data-reveal href="#contact" class="btn-primary text-sm py-4 px-8 shrink-0">
+      <a data-reveal href="#contact" class="btn-lime text-sm py-4 px-8 shrink-0">
         Nous contacter ↗
       </a>
     </div>
@@ -242,64 +284,69 @@ import Footer from '../components/Footer.astro';
   <!-- ════════════════════════════════════════
        CONTACT
   ════════════════════════════════════════ -->
-  <section id="contact" class="border-t border-hk-border">
+  <section id="contact" style="border-top:1px solid rgba(170,255,87,0.1)">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
 
       <span data-reveal class="section-label">Contact</span>
-      <h2 data-reveal class="font-display text-[clamp(3rem,8vw,6rem)] leading-[.92] tracking-wider uppercase mb-16">
+      <h2
+        data-reveal
+        class="font-display uppercase leading-[.92] tracking-wider mb-16"
+        style="font-size:clamp(3rem,8vw,6rem)"
+      >
         Travaillons<br/>ensemble.
       </h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
 
         <!-- Form -->
-        <form id="contact-form" data-reveal class="flex flex-col gap-5" novalidate>
+        <form id="contact-form" data-reveal class="flex flex-col gap-8" novalidate>
           <div class="flex flex-col gap-1.5">
-            <label class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted" for="name">Nom complet *</label>
-            <input class="field" id="name" name="name" type="text" placeholder="Jean Rakoto" required />
+            <label class="text-[10px] font-semibold uppercase tracking-widest" style="color:#4A6355" for="c-name">Nom complet *</label>
+            <input class="field" id="c-name" name="name" type="text" placeholder="Jean Rakoto" required />
           </div>
           <div class="flex flex-col gap-1.5">
-            <label class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted" for="email">Email *</label>
-            <input class="field" id="email" name="email" type="email" placeholder="jean@example.mg" required />
+            <label class="text-[10px] font-semibold uppercase tracking-widest" style="color:#4A6355" for="c-email">Email *</label>
+            <input class="field" id="c-email" name="email" type="email" placeholder="jean@example.mg" required />
           </div>
           <div class="flex flex-col gap-1.5">
-            <label class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted" for="subject">Sujet</label>
-            <input class="field" id="subject" name="subject" type="text" placeholder="Partenariat · Projet · Autre" />
+            <label class="text-[10px] font-semibold uppercase tracking-widest" style="color:#4A6355" for="c-subject">Sujet</label>
+            <input class="field" id="c-subject" name="subject" type="text" placeholder="Partenariat · Projet · Autre" />
           </div>
           <div class="flex flex-col gap-1.5">
-            <label class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted" for="message">Message *</label>
-            <textarea class="field resize-none" id="message" name="message" rows="5" placeholder="Votre message..." required></textarea>
+            <label class="text-[10px] font-semibold uppercase tracking-widest" style="color:#4A6355" for="c-message">Message *</label>
+            <textarea class="field resize-none" id="c-message" name="message" rows="5" placeholder="Votre message..." required></textarea>
           </div>
-          <button id="submit-btn" type="submit" class="btn-primary self-start">Envoyer ↗</button>
+          <button id="submit-btn" type="submit" class="btn-lime self-start">Envoyer ↗</button>
           <p id="form-msg" class="text-sm hidden"></p>
         </form>
 
         <!-- Info -->
         <div data-reveal class="flex flex-col gap-10">
           <div>
-            <div class="red-line"></div>
-            <p class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted mb-2">Email</p>
-            <a href="mailto:contact@horskadr.mg" class="font-body font-semibold text-xl hover:text-hk-red transition-colors">
+            <div class="w-10 h-px mb-4" style="background:#AAFF57"></div>
+            <p class="text-[10px] font-semibold uppercase tracking-widest mb-2" style="color:#4A6355">Email</p>
+            <a href="mailto:contact@horskadr.mg" class="font-body font-semibold text-xl transition-colors" style="color:#F0F5F0">
               contact@horskadr.mg
             </a>
           </div>
           <div>
-            <div class="red-line"></div>
-            <p class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted mb-2">Localisation</p>
+            <div class="w-10 h-px mb-4" style="background:#AAFF57"></div>
+            <p class="text-[10px] font-semibold uppercase tracking-widest mb-2" style="color:#4A6355">Localisation</p>
             <p class="font-semibold text-xl">Antananarivo, Madagascar</p>
           </div>
           <div>
-            <div class="red-line"></div>
-            <p class="text-[10px] font-semibold uppercase tracking-widest text-hk-muted mb-4">Réseaux</p>
+            <div class="w-10 h-px mb-4" style="background:#AAFF57"></div>
+            <p class="text-[10px] font-semibold uppercase tracking-widest mb-4" style="color:#4A6355">Réseaux</p>
             <div class="flex gap-3 flex-wrap">
-              <a href="https://instagram.com/horskadr" target="_blank" rel="noopener" class="btn-outline py-2 px-4 text-[11px]">Instagram ↗</a>
-              <a href="https://linkedin.com/company/horskadr" target="_blank" rel="noopener" class="btn-outline py-2 px-4 text-[11px]">LinkedIn ↗</a>
+              <a href="https://instagram.com/horskadr" target="_blank" rel="noopener" class="btn-ghost py-2 px-4 text-[11px]">Instagram ↗</a>
+              <a href="https://linkedin.com/company/horskadr" target="_blank" rel="noopener" class="btn-ghost py-2 px-4 text-[11px]">LinkedIn ↗</a>
             </div>
           </div>
-          <div class="mt-auto pt-4 border-t border-hk-border">
-            <span class="font-display text-5xl text-white/[0.04] leading-none select-none">MADE IN MADAGASCAR</span>
+          <div class="mt-auto pt-4" style="border-top:1px solid rgba(170,255,87,0.1)">
+            <span class="font-display text-5xl leading-none select-none" style="color:rgba(240,245,240,0.03)">MADE IN MADAGASCAR</span>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -308,10 +355,10 @@ import Footer from '../components/Footer.astro';
   <!-- ════════════════════════════════════════
        FOOTER
   ════════════════════════════════════════ -->
-  <footer class="border-t border-hk-border">
+  <footer style="border-top:1px solid rgba(170,255,87,0.1)">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <p class="text-hk-muted text-xs">© 2026 HORS KADR. Tous droits réservés.</p>
-      <p class="text-hk-red text-[10px] font-semibold uppercase tracking-widest">Made in Madagascar</p>
+      <p class="text-xs" style="color:#4A6355">© 2026 HORS KADR. Tous droits réservés.</p>
+      <p class="text-[10px] font-semibold uppercase tracking-widest" style="color:#AAFF57">Made in Madagascar</p>
     </div>
   </footer>
 
@@ -321,15 +368,32 @@ import Footer from '../components/Footer.astro';
 <script>
   import { gsap } from 'gsap';
 
-  // ── Hero entrance (fast stagger)
-  const tl = gsap.timeline({ delay: 0.2 });
-  tl.from('#h-label',  { opacity: 0, y: 16, duration: 0.4, ease: 'power2.out' })
-    .from('#h-title',  { opacity: 0, y: 30, duration: 0.5, ease: 'power2.out' }, '-=0.2')
-    .from('#h-sub',    { opacity: 0, y: 20, duration: 0.4, ease: 'power2.out' }, '-=0.25')
+  // Hero entrance (stagger rapide)
+  const tl = gsap.timeline({ delay: 0.15 });
+  tl.from('#h-tag',    { opacity: 0, y: 12, duration: 0.35, ease: 'power2.out' })
+    .from('#h-label',  { opacity: 0, y: 16, duration: 0.35, ease: 'power2.out' }, '-=0.15')
+    .from('#h-title',  { opacity: 0, y: 40, duration: 0.55, ease: 'power2.out' }, '-=0.2')
+    .from('#h-sub2',   { opacity: 0, y: 20, duration: 0.4,  ease: 'power2.out' }, '-=0.25')
+    .from('#h-sub',    { opacity: 0, y: 20, duration: 0.4,  ease: 'power2.out' }, '-=0.2')
     .from('#h-ctas',   { opacity: 0, y: 16, duration: 0.35, ease: 'power2.out' }, '-=0.2')
     .from('#h-scroll', { opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.1');
 
-  // ── Form handler (placeholder)
+  // Pills float animation
+  const pillIds = ['#pill-1', '#pill-2', '#pill-3'];
+  pillIds.forEach((sel, i) => {
+    const el = document.querySelector(sel) as HTMLElement | null;
+    if (!el) return;
+    gsap.to(el, {
+      y: -12,
+      duration: 2.5,
+      yoyo: true,
+      repeat: -1,
+      ease: 'sine.inOut',
+      delay: i * 0.4,
+    });
+  });
+
+  // Form handler
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const btn  = document.getElementById('submit-btn') as HTMLButtonElement;
   const msg  = document.getElementById('form-msg')!;
@@ -339,10 +403,12 @@ import Footer from '../components/Footer.astro';
     btn.textContent = 'Envoi...';
     btn.disabled = true;
     await new Promise(r => setTimeout(r, 1000));
-    msg.textContent = '✓ Message envoyé. On vous revient rapidement.';
-    msg.className = 'text-sm text-hk-red';
+    msg.textContent = 'Message envoye. On vous revient rapidement.';
+    msg.className = 'text-sm';
+    (msg as HTMLElement).style.color = '#AAFF57';
+    msg.classList.remove('hidden');
     form.reset();
-    btn.textContent = 'Envoyer ↗';
+    btn.textContent = 'Envoyer';
     btn.disabled = false;
   });
 </script>
