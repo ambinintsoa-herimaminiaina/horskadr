@@ -1,7 +1,5 @@
 ---
 import '../styles/global.css';
-import Grain from '../components/Grain.astro';
-import Cursor from '../components/Cursor.astro';
 
 interface Props {
   title?: string;
@@ -9,98 +7,124 @@ interface Props {
 }
 
 const {
-  title = 'HORS KADR',
-  description = "L'Impact. Pionnier de l'innovation malgache.",
+  title = 'HORS KADR — Le groupe malgache hors du commun',
+  description = 'HORS KADR est le mouton noir de l\'innovation malgache. Premium, souverain, Made in Madagasikara.',
 } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#060D0A" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
     <title>{title}</title>
-    <link rel="icon" href="/favicon.ico" />
-
-    <!-- Google Fonts -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   </head>
-
   <body>
-    <Grain />
-    <Cursor />
+    <!-- Progress bar -->
+    <div id="hk-progress"></div>
+    <!-- Film grain overlay -->
+    <div class="fx-grain" aria-hidden="true"></div>
+    <!-- Grid overlay -->
+    <div class="fx-grid" aria-hidden="true"></div>
+
     <slot />
 
     <script>
-      import { gsap } from 'gsap';
+      import gsap from 'gsap';
       import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
       gsap.registerPlugin(ScrollTrigger);
 
-      // Scroll-reveal
-      gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) => {
-        const delay = parseFloat(el.dataset.delay ?? '0');
-        gsap.from(el, {
-          opacity: 0,
-          y: 30,
-          duration: 0.5,
-          delay,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 90%',
-            once: true,
-          },
-        });
-      });
+      // --- Reveal elements ---
+      gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
+        const iScale = el.dataset.fx === 'scale';
+        const delay = el.classList.contains('d1') ? 0.1
+          : el.classList.contains('d2') ? 0.2
+          : el.classList.contains('d3') ? 0.3
+          : 0;
 
-      // Stagger group
-      gsap.utils.toArray<HTMLElement>('[data-stagger]').forEach((parent) => {
-        gsap.from(Array.from(parent.children), {
-          opacity: 0,
-          y: 24,
-          duration: 0.45,
-          stagger: 0.08,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: parent,
-            start: 'top 88%',
-            once: true,
-          },
-        });
-      });
-
-      // Navbar scroll state
-      const navbar = document.getElementById('navbar');
-      const onScroll = () => {
-        if (!navbar) return;
-        navbar.classList.toggle('scrolled', window.scrollY > 60);
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-
-      // Active nav link on scroll
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link[href^="#"]');
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            navLinks.forEach((l) => l.classList.remove('active'));
-            const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
-            active?.classList.add('active');
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: iScale ? 34 : 46, scale: iScale ? 0.93 : 1 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.7,
+            delay,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 90%', once: true },
           }
-        });
-      }, { rootMargin: '-40% 0px -55% 0px' });
+        );
+      });
 
-      sections.forEach((s) => observer.observe(s));
+      // --- Fadeout hero stage ---
+      const heroStage = document.querySelector<HTMLElement>('.stage[data-fx="fadeout"]');
+      if (heroStage) {
+        gsap.to(heroStage, {
+          opacity: 0,
+          y: -90,
+          scale: 0.95,
+          scrollTrigger: {
+            trigger: 'header.hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
+
+      // --- Progress bar ---
+      gsap.to('#hk-progress', {
+        scaleX: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: document.body,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: true,
+        },
+      });
+
+      // --- Marquee ---
+      const track = document.querySelector<HTMLElement>('.marquee .track');
+      if (track) {
+        gsap.to(track, { x: '-50%', duration: 25, ease: 'none', repeat: -1 });
+      }
+
+      // --- Navbar scroll state ---
+      const nav = document.getElementById('hk-nav');
+      if (nav) {
+        const onScroll = () => {
+          nav.classList.toggle('solid', window.scrollY > 40);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      }
+
+      // --- Active nav links via IntersectionObserver ---
+      const sections = document.querySelectorAll<HTMLElement>('section[id], header[id]');
+      const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-links a[href^="#"]');
+
+      if (navLinks.length && sections.length) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                navLinks.forEach((a) => {
+                  a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`);
+                });
+              }
+            });
+          },
+          { rootMargin: '-40% 0px -55% 0px' }
+        );
+        sections.forEach((s) => observer.observe(s));
+      }
     </script>
   </body>
 </html>
