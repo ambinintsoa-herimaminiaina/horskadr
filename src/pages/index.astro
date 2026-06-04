@@ -12,20 +12,23 @@ import Navbar from '../components/Navbar.astro';
     <div class="wrap">
       <div class="stage" data-fx="fadeout">
 
-        <!-- cadre intérieur -->
-        <div class="cadre reveal d1">
-          <span class="tag">LE CADRE / NY FÉFY</span>
-          <span class="brk tl"></span>
-          <span class="brk tr"></span>
-          <span class="brk bl"></span>
-          <span class="brk br"></span>
-          <h1 class="impact xtitle">
-            <span class="l1">HORS</span>
-            <span class="l2">
-              <span class="glitch go" data-text="KADR">KADR</span>
-              <span class="pt">.</span>
+        <!-- titre brisé: HORS libre / KADR dans le cadre -->
+        <div class="hero-break reveal d1">
+          <!-- HORS : sans boîte, libre -->
+          <div class="hb-free">
+            <span class="hb-tag">LE CADRE / NY FÉFY</span>
+            <span class="impact hb-hors">HORS</span>
+          </div>
+          <!-- KADR : dans le cadre (mais le cadre résiste mal) -->
+          <div class="cadre hb-cadre">
+            <span class="brk tl"></span>
+            <span class="brk tr"></span>
+            <span class="brk bl"></span>
+            <span class="brk br"></span>
+            <span class="impact hb-kadr">
+              <span class="glitch go" data-text="KADR">KADR</span><span class="pt">.</span>
             </span>
-          </h1>
+          </div>
         </div>
 
         <!-- accroche + L'IMPACT rouge -->
