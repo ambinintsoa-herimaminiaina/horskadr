@@ -110,18 +110,8 @@ body {
 .seclabel .mg { color: var(--ink-faint); }
 .seclabel .fill { flex: 1; height: 1px; background: var(--line); }
 
-/* --- REC dot --- */
-.rec {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-}
-.rec .dot, .dot {
+/* --- Status dot --- */
+.dot {
   width: 9px;
   height: 9px;
   border-radius: 50%;
@@ -284,20 +274,6 @@ body {
 }
 .marquee .track .sep { color: rgba(244,243,241,.5); }
 
-/* --- Scanlines --- */
-.scan {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0 2px,
-    rgba(0,0,0,.08) 2px 4px
-  );
-  opacity: .4;
-}
-
 /* --- Glitch --- */
 .glitch { position: relative; display: inline-block; }
 .glitch.go::before,
@@ -329,23 +305,6 @@ body {
   91% { transform: translate(-2px,-1px); opacity: 1; }
   93% { transform: translate(0); opacity: 0; }
 }
-
-/* --- Crosshair --- */
-.crosshair {
-  position: absolute;
-  width: 16px; height: 16px;
-  pointer-events: none;
-  z-index: 4;
-}
-.crosshair::before,
-.crosshair::after {
-  content: "";
-  position: absolute;
-  background: var(--red);
-  opacity: .5;
-}
-.crosshair::before { width: 1px; height: 100%; left: 50%; top: 0; }
-.crosshair::after  { height: 1px; width: 100%; top: 50%; left: 0; }
 
 /* --- Mono utility --- */
 .mono { font-family: var(--mono); }
@@ -416,16 +375,8 @@ body {
 }
 .nav-cta:hover { border-color: var(--red); background: rgba(227,6,19,.08); }
 
-#tc-nav {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--ink-faint);
-  letter-spacing: .06em;
-}
-
 @media (max-width: 900px) {
   .nav-links { display: none; }
-  #tc-nav { display: none; }
 }
 
 /* ===================== HERO ===================== */
@@ -442,18 +393,6 @@ body {
   padding: 120px 0 80px;
   display: grid;
   gap: clamp(28px,5vh,48px);
-}
-
-.tcrow {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.tcrow .coords {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: .08em;
 }
 
 .cadre {

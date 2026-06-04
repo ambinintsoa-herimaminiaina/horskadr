@@ -8,26 +8,9 @@ import Navbar from '../components/Navbar.astro';
   <!-- ============================================================
        HERO — Direction B "Hors Cadre"
        ============================================================ -->
-  <header class="hero heroX" id="hero">
-    <!-- scanlines -->
-    <div class="scan"></div>
-    <!-- brackets rouges -->
-    <div class="brackets red">
-      <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
-    </div>
-    <!-- crosshairs -->
-    <span class="crosshair" style="top:19%;left:11%"></span>
-    <span class="crosshair" style="bottom:22%;right:13%"></span>
-
+  <header class="hero" id="hero">
     <div class="wrap">
       <div class="stage" data-fx="fadeout">
-
-        <!-- ligne timecode -->
-        <div class="tcrow reveal">
-          <span class="rec"><span class="dot"></span>ENR. EN COURS</span>
-          <span id="tc-hero" class="mono tnum" style="color:var(--ink-dim)">TC 00:00:00:00</span>
-          <span class="coords" style="color:var(--ink-faint)">● 4K · 25FPS · -18.8792 / 47.5079</span>
-        </div>
 
         <!-- cadre intérieur -->
         <div class="cadre reveal d1">
@@ -37,9 +20,9 @@ import Navbar from '../components/Navbar.astro';
           <span class="brk bl"></span>
           <span class="brk br"></span>
           <h1 class="impact xtitle">
-            <span class="l1">HORS DU</span>
+            <span class="l1">HORS</span>
             <span class="l2">
-              <span class="glitch go" data-text="CADRE">CADRE</span>
+              <span class="glitch go" data-text="KADR">KADR</span>
               <span class="pt">.</span>
             </span>
           </h1>
@@ -48,9 +31,9 @@ import Navbar from '../components/Navbar.astro';
         <!-- accroche + L'IMPACT rouge -->
         <div class="xrow reveal d2">
           <p class="accroche">
-            Le <b>mouton noir</b> de l'innovation malgache. Pendant que les autres restent
-            dans la ligne, nous filmons l'avenir hors-champ — premium, souverain,
-            <b>Made in Madagasikara</b>.
+            Le <b>mouton noir</b> de l'entrepreneuriat malgache. Pas de raccourcis,
+            pas d'imitation — un groupe qui construit avec rigueur, fierté
+            et une <b>ambition souveraine</b>.
           </p>
           <div class="ximpact">
             <span class="redblock">L'IMPACT.</span>
@@ -114,8 +97,9 @@ import Navbar from '../components/Navbar.astro';
       <div class="vision-grid">
         <div class="reveal d1">
           <p class="vision-lead">
-            Avoir de l'<span class="accent">impact</span><br />
-            à chaque cadre.
+            L'<span class="accent">impact</span><br />
+            à chaque<br />
+            décision.
           </p>
         </div>
         <div class="vision-body reveal d2">
@@ -130,8 +114,8 @@ import Navbar from '../components/Navbar.astro';
             projet que nous lançons doit porter la marque de cette exigence.
           </p>
           <p>
-            Nous refusons la médiocrité. Nous refusons les raccourcis. Nous filmons
-            l'avenir hors-cadre — au sens propre comme au sens figuré.
+            Nous refusons la médiocrité. Nous refusons les raccourcis. Nous construisons
+            l'avenir ici, à Madagascar — et le monde verra.
           </p>
           <span class="tongasoa">— Tongasoa / Bienvenue dans le groupe</span>
         </div>
@@ -336,22 +320,3 @@ import Navbar from '../components/Navbar.astro';
 
 </Layout>
 
-<script>
-  // Timecode hero
-  (function () {
-    const el = document.getElementById('tc-hero');
-    if (!el) return;
-    const start = Date.now();
-    function tick() {
-      const e = (Date.now() - start) / 1000;
-      const h = Math.floor(e / 3600) % 24;
-      const m = Math.floor(e / 60) % 60;
-      const s = Math.floor(e) % 60;
-      const f = Math.floor((e % 1) * 25);
-      const p = (n: number) => String(n).padStart(2, '0');
-      el.textContent = `TC ${p(h)}:${p(m)}:${p(s)}:${p(f)}`;
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  })();
-</script>

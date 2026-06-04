@@ -5,8 +5,6 @@
     <img src="/assets/logo-white.png" alt="HORS KADR" height="34" />
   </a>
 
-  <span id="tc-nav" class="mono tnum">TC 00:00:00:00</span>
-
   <ul class="nav-links">
     <li><a href="#vision">Vision</a></li>
     <li><a href="#verticales">Verticales</a></li>
@@ -14,27 +12,6 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
 
-  <a class="nav-cta" href="#contact">
-    <span class="dot"></span>
-    Rejoindre
-  </a>
+  <a class="nav-cta" href="#contact">Rejoindre</a>
 </nav>
 
-<script>
-  (function () {
-    const el = document.getElementById('tc-nav');
-    if (!el) return;
-    const start = Date.now();
-    function tick() {
-      const e = (Date.now() - start) / 1000;
-      const h = Math.floor(e / 3600) % 24;
-      const m = Math.floor(e / 60) % 60;
-      const s = Math.floor(e) % 60;
-      const f = Math.floor((e % 1) * 25);
-      const p = (n: number) => String(n).padStart(2, '0');
-      el.textContent = `TC ${p(h)}:${p(m)}:${p(s)}:${p(f)}`;
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  })();
-</script>
