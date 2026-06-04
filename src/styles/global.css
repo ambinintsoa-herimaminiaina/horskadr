@@ -425,6 +425,14 @@ body {
   transform-origin: left bottom;
 }
 
+.hb-o {
+  display: inline-block;
+  height: .84em;
+  width: .84em;
+  vertical-align: -.06em;
+  margin: 0 .01em;
+}
+
 .hb-cadre {
   transform: rotate(-1.4deg) translateX(48px);
   transform-origin: left top;
