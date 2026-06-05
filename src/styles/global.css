@@ -604,6 +604,21 @@ body {
   text-transform: uppercase;
   letter-spacing: .02em;
 }
+.vrow-link {
+  text-decoration: none;
+  color: inherit;
+}
+.vrow-link:hover .vrow-title { color: var(--red); }
+.vrow-ext {
+  font-size: .65em;
+  color: var(--red);
+  vertical-align: super;
+  margin-left: 4px;
+  transition: transform .2s;
+  display: inline-block;
+}
+.vrow-link:hover .vrow-ext { transform: translate(2px,-2px); }
+
 .vrow-desc {
   font-size: 14px;
   color: var(--ink-dim);
